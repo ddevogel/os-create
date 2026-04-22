@@ -1,0 +1,20 @@
+FROM alpine:latest
+# RUN apk add --no-cache build-base cmake autoconf automake libtool git
+# System dependencies (Ubuntu/Debian)
+RUN apk update && apk add --no-cache build-base curl git qemu-system-aarch64
+
+# macOS: brew install qemu
+
+# Install Rust nightly + AArch64 target (skip if already installed)
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
+RUN source $HOME/.cargo/env
+#RUN rustup default nightly
+#RUN rustup target add aarch64-unknown-none
+#RUN rustup component add rust-src --toolchain nightly
+
+# Build and run
+#git clone https://github.com/bahree/rust-microkernel.git
+#cd rust-microkernel
+#./scripts/build-aarch64-virt.sh
+#./scripts/run-aarch64-virt.sh
+# Press Ctrl+A then X to exit QEMU
